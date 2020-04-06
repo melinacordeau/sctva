@@ -25,6 +25,9 @@ def local_maxima_2_text(img, path_text_file):
     np.savext(path_text_file, mm_coord)
 
 def main():
+    '''
+    :return:
+    '''
     parser = build_argparser()
     args = parser.parse_args()
 
