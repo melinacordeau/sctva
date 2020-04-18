@@ -24,6 +24,14 @@ def local_maxima_2_text(img, path_text_file):
     mm_coord = nib.affines.apply_affine(affine, voxels_coord)
     np.savext(path_text_file, mm_coord)
 
+def extract_local_maxima(path_volume, path_text_file):
+    try:
+        nii = nib.load(path_volume)
+        local_maxima_2_text(nii, path_text_file)
+    except:
+        print('Volume could not be loaded')
+    pass
+
 def main():
     '''
     :return:
