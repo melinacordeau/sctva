@@ -19,7 +19,7 @@ def local_maxima_2_text(img, path_text_file):
     :return: void
     '''
     affine = img.affine
-    volume = img.data
+    volume = img.get_data()
     voxels_coord = peak_local_max(volume)
     mm_coord = nib.affines.apply_affine(affine, voxels_coord)
     np.savext(path_text_file, mm_coord)
