@@ -9,7 +9,7 @@ import os
 
 N = 10
 SUBJECTS_PREFIX = 'sub-'
-SUBJECTS = (SUBJECTS_PREFIX + '0' + str(i) if i < 10 else SUBJECTS_PREFIX + str(i) for i in range(1, N, 1))
+SUBJECTS = [SUBJECTS_PREFIX + '0' + str(i) if i < 10 else SUBJECTS_PREFIX + str(i) for i in range(1, N, 1)]
 
 
 

@@ -14,7 +14,7 @@ if __name__ == '__main__':
     if not os.path.exists(test_dir):
         os.makedirs(test_dir)
 
-    path_functionnal_volume = os.path.join() # a completer
+    path_functionnal_volume =       # a completer
     path_peaks_coordinates = os.path.join(test_dir, 'functionnal_peaks.txt')
 
     extract_local_maxima(path_functionnal_volume, path_peaks_coordinates)
