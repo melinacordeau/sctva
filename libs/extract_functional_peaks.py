@@ -11,7 +11,7 @@ def build_argparser():
     return p
 
 
-def local_maxima_2_text(img, path_text_file):
+def local_maxima_2_text(img, path_text_file, distance=3, num_peaks=10):
     '''
     Extract all local maxima of an up to 3D volume and save their coordinate into RAS-mm space in a text file
     :param path_volume: the path of the input volume
@@ -20,7 +20,7 @@ def local_maxima_2_text(img, path_text_file):
     '''
     affine = img.affine
     volume = img.get_data()
-    voxels_coord = peak_local_max(volume)
+    voxels_coord = peak_local_max(volume,min_distance=distance,num_peaks=num_peaks)
     mm_coord = nib.affines.apply_affine(affine, voxels_coord)
     np.savetxt(path_text_file, mm_coord)
 
