@@ -25,6 +25,7 @@ def local_maxima_2_text(img, path_text_file, distance=3, num_peaks=10):
     np.savetxt(path_text_file, mm_coord)
 
 def extract_local_maxima(path_volume, path_text_file):
+    'test'
     nii = nib.load(path_volume)
     local_maxima_2_text(nii, path_text_file)
     pass
