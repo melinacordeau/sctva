@@ -1,4 +1,4 @@
-from libs.extract_functional_peaks import extract_local_maxima
+from scripts.extract_functional_peaks import extract_local_maxima
 
 
 
