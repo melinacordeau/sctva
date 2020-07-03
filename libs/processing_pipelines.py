@@ -57,7 +57,9 @@ tractography.inputs.backtrack = True
 tractography.inputs.min_length = 10  # 10 mm to avoid spurious streamlines
 tractography.inputs.max_length = 300  # 300 mm
 
-# TODO create interface for tcksift
+# TODO create command line interface for tcksift
+# TODO create command line interface for mrregister or use dipy
+# TODO create function interface for tckconvert or use dipy
 
 
 # Workflows corresponding to main steps (for the sake of modularity)
