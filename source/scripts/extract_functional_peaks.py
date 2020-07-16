@@ -1,5 +1,6 @@
 """
 
+
 """
 
 import argparse
@@ -22,24 +23,28 @@ def build_argparser():
     return p
 
 
-def local_maxima_2_text(img, path_text_file, distance=3, num_peaks=10):
+def local_max_to_txt(img, path_text_file, distance=5, num_peaks=10):
     """
-    Extract all local maxima of an up to 3D volume and save their coordinate into RAS-mm space in a text file
-    :param path_volume: the path of the input volume
-    :param path__text_file: the path of the text file containing the local_maxima to store
-    :return: void
+    Extract the first num_peaks th most important local maxima from a multidimensionnal discrete scalar function
+    and store their coordinates into a txt file
+    :param img: nd volume (nd scalar function)
+    :param path_text_file: txt file to store peaks coordinates
+    :param distance: neighbourhood in voxel on which to look for a maxima
+    :param num_peaks: number of peaks to retrieve (to avoid spurious peaks)
+    :return:
     """
+    # retrieve voxel to RAS mm space transform
     affine = img.affine
-    volume = img.get_data()
+    volume = img.get_fdata()
     voxels_coord = peak_local_max(volume, min_distance=distance, num_peaks=num_peaks)
     mm_coord = nib.affines.apply_affine(affine, voxels_coord)
     np.savetxt(path_text_file, mm_coord)
 
 
 def extract_local_maxima(path_volume, path_text_file):
-    "test"
+    """ Load a nifti volume and extract its local maxima """
     nii = nib.load(path_volume)
-    local_maxima_2_text(nii, path_text_file)
+    local_max_to_txt(nii, path_text_file)
     pass
 
 
@@ -52,9 +57,9 @@ def main():
 
     try:
         nii = nib.load(args.volume)
-        local_maxima_2_text(nii, args.textfile)
+        local_max_to_txt(nii, args.textfile)
     except:
-        parser.error("Expecting 3D volume as first argument.")
+        parser.error("Expecting 3D volume as first argument")
 
 
 if __name__ == "__main__":
