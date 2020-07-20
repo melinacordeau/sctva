@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-BASE_REQUIREMENTS = ["nipype", "nibabel", "numpy", "scikit-image"]
+BASE_REQUIREMENTS = ["nipype", "nibabel", "numpy", "scikit-image","mrproc@git+https://github.com/alexpron/mrproc"]
 DEV_REQUIREMENTS = ["black", "flake8", "pytest", "pytest-cov", "codecov"]
 
 
@@ -14,7 +14,7 @@ setup(
     description="Structural Connectivity of Temporal Voice Areas",
     url="https://github.com/alexpron/connectivity_tva",
     license="MIT",
-    python_requires='>=3.6',  # enforce Python 3.6 as minimum
+    python_requires=">=3.6",  # enforce Python 3.6 as minimum
     install_requires=BASE_REQUIREMENTS,
     extras_require={"dev": DEV_REQUIREMENTS},
     classifiers=[

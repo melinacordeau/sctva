@@ -5,9 +5,9 @@
 
 import argparse
 
-import numpy as np
-import nibabel as nib
-from skimage.feature import peak_local_max
+
+DIST = 5
+NB_PEAKS = 10
 
 
 def build_argparser():
@@ -23,7 +23,7 @@ def build_argparser():
     return p
 
 
-def local_max_to_txt(img, path_text_file, distance=5, num_peaks=10):
+def local_max_to_txt(img, path_text_file, distance=DIST, num_peaks=NB_PEAKS):
     """
     Extract the first num_peaks th most important local maxima from a multidimensionnal discrete scalar function
     and store their coordinates into a txt file
@@ -33,6 +33,10 @@ def local_max_to_txt(img, path_text_file, distance=5, num_peaks=10):
     :param num_peaks: number of peaks to retrieve (to avoid spurious peaks)
     :return:
     """
+    import numpy as np
+    import nibabel as nib
+    from skimage.feature import peak_local_max
+
     # retrieve voxel to RAS mm space transform
     affine = img.affine
     volume = img.get_fdata()
@@ -41,10 +45,12 @@ def local_max_to_txt(img, path_text_file, distance=5, num_peaks=10):
     np.savetxt(path_text_file, mm_coord)
 
 
-def extract_local_maxima(path_volume, path_text_file):
+def extract_local_maxima(path_volume, path_text_file, distance=DIST, nb_peaks=NB_PEAKS):
     """ Load a nifti volume and extract its local maxima """
+    import nibabel as nib
+
     nii = nib.load(path_volume)
-    local_max_to_txt(nii, path_text_file)
+    local_max_to_txt(nii, path_text_file, distance, nb_peaks)
     pass
 
 
@@ -56,10 +62,9 @@ def main():
     args = parser.parse_args()
 
     try:
-        nii = nib.load(args.volume)
-        local_max_to_txt(nii, args.textfile)
+        extract_local_maxima(args.volume, args.textfile)
     except:
-        parser.error("Expecting 3D volume as first argument")
+        parser.error("Error")
 
 
 if __name__ == "__main__":
