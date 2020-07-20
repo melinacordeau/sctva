@@ -12,7 +12,7 @@ setup(
     packages=find_packages(),
     author="Alexandre Pron",
     description="Structural Connectivity of Temporal Voice Areas",
-    url="https://github.com/alexpron/connectivity_tva",
+    url="https://github.com/alexpron/sctva",
     license="MIT",
     python_requires=">=3.6",  # enforce Python 3.6 as minimum
     install_requires=BASE_REQUIREMENTS,
