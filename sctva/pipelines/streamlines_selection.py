@@ -19,19 +19,19 @@ def create_streamline_selection_from_functional_contrast_pipeline():
 
     :return:
     """
-    # Nodes
 
-    get_func_max_peaks_node = create_functional_max_extraction_node()
-    pair_func_max_peaks_node = create_get_pairs_node()
-    select_stream_from_spheres = create_tracks_selection_node()
-
-    # Input and output nodes
+    # Pipeline nodes
     inputnode = pe.Node(
         utility.IdentityInterface(
             fields=["tractogram", "functional_contrast"], mandatory_inputs=False
         ),
         name="inputnode",
     )
+
+    get_func_max_peaks_node = create_functional_max_extraction_node()
+    pair_func_max_peaks_node = create_get_pairs_node()
+    select_stream_from_spheres = create_tracks_selection_node()
+
     outputnode = pe.Node(
         utility.IdentityInterface(
             fields=["peaks", "tractograms"], mandatory_inputs=False
