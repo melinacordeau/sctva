@@ -7,10 +7,10 @@
 import nipype.pipeline.engine as pe
 from nipype.interfaces import utility
 
-from source.nodes.mrtrix_nodes import create_tracks_selection_node
-from source.nodes.custom_nodes import (
+from sctva.nodes.custom_nodes import (
     create_functional_max_extraction_node,
     create_get_pairs_node,
+    create_tracks_selection_node
 )
 
 
