@@ -14,4 +14,4 @@ pip install .
 pip install -e .['dev']
 ```
 # Current Pipeline Structure
-![graph](./tests/graph.png)
+![graph](./tests/main_graph.png)

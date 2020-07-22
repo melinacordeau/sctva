@@ -32,46 +32,47 @@ def create_main_pipeline():
     #
     templates = {
         "diffusion_volume": "DTI/{center}/{subject_id}/{modality}/{acquisition}/{"
-                            "correction}/corrected_dwi_{subject_id}.nii.gz",
+        "correction}/corrected_dwi_{subject_id}.nii.gz",
         "bvals": "DTI/{center}/{subject_id}/{modality}/{acquisition}/raw_bvals_{subject_id}.txt",
         "bvecs": "DTI/{center}/{subject_id}/{modality}/{acquisition}/{correction}/corrected_bvecs_{subject_id}.txt",
         "t1_volume": "analysis_{subject_id}/anat/{subject_id}_ses-01_T1W_denoised_debiased_in_MNI152.nii.gz",
-        "func_contrast_volume": "analysis_{subject_id}/spm_realign/results_8WM_9CSF_0mvt/In-MNI152_{subject_id}_res-8WM_9CSF_0mvt_human_vs_all_t.nii.gz"
+        "func_contrast_volume": "analysis_{subject_id}/spm_realign/results_8WM_9CSF_0mvt/In-MNI152_{subject_id}_res-8WM_9CSF_0mvt_human_vs_all_t.nii.gz",
     }
-    datagrabber = pe.Node(SelectFiles(templates), name='datagrabber')
+    datagrabber = pe.Node(SelectFiles(templates), name="datagrabber")
     datagrabber.inputs.base_dir = PRIMAVOICE
-
 
     study_pipeline = create_study_pipeline(radius=RADIUS)
 
     main_pipeline = pe.Workflow(name="main_pipeline")
 
     main_pipeline.connect(
-        [(
-            inputnode,
-            datagrabber,
-            [
-                ("subject_id", "subject_id"),
-                ("center", "center"),
-                ("modality", "modality"),
-                ("acquisition", "acquisition"),
-                ("correction", "correction"),
-            ],
-        )
+        [
+            (
+                inputnode,
+                datagrabber,
+                [
+                    ("subject_id", "subject_id"),
+                    ("center", "center"),
+                    ("modality", "modality"),
+                    ("acquisition", "acquisition"),
+                    ("correction", "correction"),
+                ],
+            )
         ]
     )
     main_pipeline.connect(
-        [(
-            datagrabber,
-            study_pipeline,
-            [
-            ("diffusion_volume", "inputnode.diffusion_volume"),
-            ("bvals", "inputnode.bvals"),
-            ("bvecs", "inputnode.bvecs"),
-            ("t1_volume","inputnode.t1_volume"),
-            ("func_contrast_volume", "inputnode.func_contrast_volume")
-            ]
-        )
+        [
+            (
+                datagrabber,
+                study_pipeline,
+                [
+                    ("diffusion_volume", "inputnode.diffusion_volume"),
+                    ("bvals", "inputnode.bvals"),
+                    ("bvecs", "inputnode.bvecs"),
+                    ("t1_volume", "inputnode.t1_volume"),
+                    ("func_contrast_volume", "inputnode.func_contrast_volume"),
+                ],
+            )
         ]
     )
     return main_pipeline
