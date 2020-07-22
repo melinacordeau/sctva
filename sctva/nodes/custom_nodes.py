@@ -77,7 +77,7 @@ def create_functional_max_extraction_node():
             output_names=["path_text_file"],
             function=extract_local_maxima,
         ),
-        name="extract_local_max"
+        name="extract_local_max",
     )
     return extract_local_max
 
@@ -89,22 +89,23 @@ def create_get_pairs_node():
             output_names=["pairs"],
             function=extract_pairs,
         ),
-        name="get_pairs"
+        name="get_pairs",
     )
     return get_pairs
 
 
-def create_tracks_selection_node():
+def create_tracks_selection_node(radius):
     """
     :return:
     """
     tracks_selection = pe.MapNode(
         interface=Function(
-            input_names=["input_tracks", "pairs"],
+            input_names=["input_tracks", "pairs", "radius"],
             output_names=["output_tracks"],
             function=select_between_spheres,
         ),
         name="tracks_selection",
-        iterfield=["pairs"]
+        iterfield=["pairs"],
     )
+    tracks_selection.inputs.radius = radius
     return tracks_selection

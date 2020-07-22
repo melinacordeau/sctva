@@ -2,7 +2,13 @@
 
 from setuptools import setup, find_packages
 
-BASE_REQUIREMENTS = ["nipype", "nibabel", "numpy", "scikit-image","mrproc@git+https://github.com/alexpron/mrproc"]
+BASE_REQUIREMENTS = [
+    "nipype",
+    "nibabel",
+    "numpy",
+    "scikit-image",
+    "mrproc@git+https://github.com/alexpron/mrproc",
+]
 DEV_REQUIREMENTS = ["black", "flake8", "pytest", "pytest-cov", "codecov"]
 
 

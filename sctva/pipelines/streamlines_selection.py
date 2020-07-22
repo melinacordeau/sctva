@@ -10,11 +10,11 @@ from nipype.interfaces import utility
 from sctva.nodes.custom_nodes import (
     create_functional_max_extraction_node,
     create_get_pairs_node,
-    create_tracks_selection_node
+    create_tracks_selection_node,
 )
 
 
-def create_streamline_selection_from_functional_contrast_pipeline():
+def create_streamline_selection_from_functional_contrast_pipeline(radius):
     """
 
     :return:
@@ -30,7 +30,7 @@ def create_streamline_selection_from_functional_contrast_pipeline():
 
     get_func_max_peaks_node = create_functional_max_extraction_node()
     pair_func_max_peaks_node = create_get_pairs_node()
-    select_stream_from_spheres = create_tracks_selection_node()
+    select_stream_from_spheres = create_tracks_selection_node(radius)
 
     outputnode = pe.Node(
         utility.IdentityInterface(
