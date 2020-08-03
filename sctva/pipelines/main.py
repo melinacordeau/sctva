@@ -45,6 +45,7 @@ def create_main_pipeline():
 
     main_pipeline = pe.Workflow(name="main_pipeline")
 
+
     main_pipeline.connect(
         [
             (
