@@ -13,7 +13,7 @@ from sctva.configuration import (
 )
 
 
-def create_main_pipeline():
+def create_main_pipeline(subject_list=SUBJECTS):
     RADIUS = 5  # selection sphere radius (mm)
 
     # create node that contains meta-variables about data
@@ -27,7 +27,7 @@ def create_main_pipeline():
     inputnode.inputs.modality = MODALITY
     inputnode.inputs.acquisition = ACQUISITION
     inputnode.inputs.correction = CORRECTION
-    inputnode.iterables = [("subject_id", SUBJECTS)]
+    inputnode.iterables = [("subject_id", subject_list)]
 
     #
     templates = {
@@ -35,11 +35,12 @@ def create_main_pipeline():
         "correction}/corrected_dwi_{subject_id}.nii.gz",
         "bvals": "DTI/{center}/{subject_id}/{modality}/{acquisition}/raw_bvals_{subject_id}.txt",
         "bvecs": "DTI/{center}/{subject_id}/{modality}/{acquisition}/{correction}/corrected_bvecs_{subject_id}.txt",
-        "t1_volume": "analysis_{subject_id}/anat/{subject_id}_ses-01_T1W_denoised_debiased_in_MNI152.nii.gz",
+        "t1_volume": "analysis_{subject_id}/anat/{"
+                     "subject_id}_ses-01_T1w_denoised_debiased_in-MNI152.nii.gz",
         "func_contrast_volume": "analysis_{subject_id}/spm_realign/results_8WM_9CSF_0mvt/In-MNI152_{subject_id}_res-8WM_9CSF_0mvt_human_vs_all_t.nii.gz",
     }
     datagrabber = pe.Node(SelectFiles(templates), name="datagrabber")
-    datagrabber.inputs.base_dir = PRIMAVOICE
+    datagrabber.inputs.base_directory = PRIMAVOICE
 
     study_pipeline = create_study_pipeline(radius=RADIUS)
 
