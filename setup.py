@@ -2,8 +2,8 @@
 
 from setuptools import setup, find_packages
 
-BASE_REQUIREMENTS = [
-    "nipype",
+BASE_REQUIREMENTS = ["nipype@git+https://github.com/GalBenZvi/nipype@patch-1#egg"
+                     "=nipype",
     "nibabel",
     "numpy",
     "scikit-image",
