@@ -24,7 +24,7 @@ def build_argparser():
     p.add_argument("dist", metavar="dist", nargs="?", default=DIST, help="size in "
                                                                          "voxel "
                                                                        "of the "
-                                                                       "neighbourhoud on which to look for a peak")
+                                                                       "neighbourhood on which to look for a peak")
     return p
 
 
