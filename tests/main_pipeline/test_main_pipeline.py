@@ -1,4 +1,4 @@
-from sctva.pipelines.main import create_main_pipeline
+from main import create_main_pipeline
 
 
 def test_create_main_pipeline():

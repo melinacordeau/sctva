@@ -107,7 +107,7 @@ CONTRAST = {
         "spm_realign",
         "results_8WM_9CSF_0mvt",
         "In-MNI152" + "_" + subject + "_" + "res-8WM_9CSF_0mvt_human_vs_all_t.nii.gz",
-    )
+
     for subject in SUBJECTS
 }
 

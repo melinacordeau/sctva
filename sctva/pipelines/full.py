@@ -6,8 +6,6 @@ import nipype.pipeline.engine as pe
 from nipype.interfaces import utility
 
 from mrproc.pipelines.diffusion import create_diffusion_pipeline
-from mrproc.nodes.custom_nodes import create_apply_linear_transform_node
-
 from sctva.pipelines.streamlines_selection import (
     create_streamline_selection_from_functional_contrast_pipeline,
 )
