@@ -1,4 +1,4 @@
-from sctva.pipelines.full import create_study_pipeline
+from full import create_study_pipeline
 
 
 def test_create_study_pipeline():

@@ -14,12 +14,8 @@ def build_argparser():
     """
     :return:
     """
-    DESCRIPTION = "Extract streamlines connecting pairs of maxima of volume of " \
-                  "interest (here functionnal contrast)"
-    DIST = 5
-    NB_PEAKS = 10
-    RADIUS = 5
-    p = argparse.ArgumentParser(description=DESCRIPTION)
+
+    p = argparse.ArgumentParser(description=description)
     p.add_argument(
        "volume", metavar="volume", help=" path of the 3D volume (.nii|.nii.gz.)"
     )

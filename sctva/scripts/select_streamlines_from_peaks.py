@@ -16,9 +16,8 @@ def build_argparser():
     """
     :return:
     """
-    DESCRIPTION = "Extract streamlines connecting pairs of maxima "
-    RADIUS = 5
-    p = argparse.ArgumentParser(description=DESCRIPTION)
+    description = "Extract streamlines connecting pairs of maxima "
+    p = argparse.ArgumentParser(description=description)
     p.add_argument("tractogram", metavar="tractogram", help="path of the whole brain "
                                                             "tractogram ("
                                                            ".tck)")
@@ -30,7 +29,7 @@ def build_argparser():
                                                             "where to store the "
                                                             "selected streamlines and the extracted_maxima")
 
-    p.add_argument("radius", metavar="radius",nargs="?", default=RADIUS,
+    p.add_argument("radius", metavar="radius",nargs="?", default=5,
                    help="radius of the selection spheres in mmm")
     return p
 

@@ -2,7 +2,7 @@ import nipype.pipeline.engine as pe
 from nipype.interfaces import IdentityInterface
 from nipype import SelectFiles, Node
 
-from sctva.pipelines.full import create_study_pipeline
+from full import create_study_pipeline
 from configuration import (
     PRIMAVOICE,
     CENTER,

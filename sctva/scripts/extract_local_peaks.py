@@ -5,9 +5,8 @@ Extraction of local maxima, minima ou optima from a n-dimensional scalar nifti v
 
 import argparse
 
-import numpy as np
-import nibabel as nib
-from skimage.feature import peak_local_max
+from ..core.extract_local_peaks import local_peak_to_volume
+
 
 
 def build_argparser():
@@ -55,35 +54,6 @@ def build_argparser():
     return p
 
 
-def local_peak_to_volume(path_volume, path_peak_mask_volume, type_peak, distance, \
-                         num_peaks):
-    """ Extract local maxima from a n-dimensional scalar nifti volume
-
-    Local maxima are searched within a distance voxel radius neighbourhood and only
-    the num_peaks th most important maxima (in magnitude) are returned
-
-
-    :param path_volume: path of the input n-dimensional scalar nifti volume (
-    .nii|.nii.gz)
-    :param path_peak_mask_volume: path of the output n-dimensional boolean nifti
-    volume containing maxima location (.nii|.nii.gz)
-    :param distance: size in voxel (int)
-    :param num_peaks: maximum number of peaks to return based on their magnitude
-    :return: None
-    """
-    volume = nib.load(path_volume)
-    data = volume.get_fdata()
-    if type_peak == 'optima':
-        data = np.abs(data)
-    elif type_peak == 'minima':
-        data = -data
-    if num_peaks is None:
-        num_peaks = np.inf
-    peaks_mask = peak_local_max(data, min_distance=distance, num_peaks=num_peaks,
-                                indices=False)
-    peaks_volume = nib.Nifti1Image(peaks_mask, volume.affine, volume.header)
-    nib.save(peaks_volume, path_peak_mask_volume)
-    pass
 
 
 def main():
