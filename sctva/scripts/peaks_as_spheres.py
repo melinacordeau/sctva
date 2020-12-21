@@ -25,6 +25,7 @@ def peaks_as_spheres(path_peaks_volume, path_spheres, radius=2):
     scaling.fromMatrix(np.diag(voxel_size))
     peaks_vol_coord = np.transpose(np.vstack(np.where(data != 0)))
     centers = [aims.Point3df(p) for p in peaks_vol_coord]
+    print(len(centers))
 
     for i, center in enumerate(centers):
         center = scaling.transform(center)
