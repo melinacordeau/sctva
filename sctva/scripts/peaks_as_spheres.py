@@ -1,3 +1,8 @@
+"""
+Represents peaks as spheres
+Requires
+"""
+
 import argparse
 
 import numpy as np
@@ -6,9 +11,10 @@ from soma import aims, aimsalgo
 
 def peaks_as_spheres(path_peaks_volume, path_spheres, radius=2):
     """
-    Generate sphere of radius radius centered on detected peaks
-    :param path_peaks_volume:
-    :param radius:
+    Represent peaks as spheres centered on peaks location and of radius radius
+    :param path_peaks_volume: path of the boolean volume with peaks
+    :param path_spheres: path of the mesh (spheres) representing the peaks
+    :param radius: radius (in mm) of the spheres used for display
     :return:
     """
     volume = aims.read(path_peaks_volume)
@@ -37,12 +43,14 @@ def build_argparser():
     DESCRIPTION = "Generate spheres from a mask volume"
     p = argparse.ArgumentParser(description=DESCRIPTION)
     p.add_argument(
-       "volume", metavar="volume", help=" path of the 3D volume(.nii|.nii.gz.)"
+       "volume", metavar="volume", help=" path of the 3D volume ("
+                                        ".nii|.nii.gz)"
     )
-    p.add_argument("spheres", metavar="spheres", help="path of the spheres as mesh "
-                                                           ".gii")
-    p.add_argument("radius", metavar="radius", nargs="?", default=2, help="spheres "
-                                                                          "radius")
+    p.add_argument("spheres", metavar="spheres", help="path of the spheres ("
+                                                           ".gii)")
+    p.add_argument("radius", metavar="radius", nargs="?", default=2,
+                   help="radius of the spheres, (default: %("
+                        "default)s mm)")
     return p
 
 
