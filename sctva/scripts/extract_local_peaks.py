@@ -25,8 +25,18 @@ def get_local_peaks(array, type_peak, distance, num_peaks):
         array = -array
     if num_peaks is None:
         num_peaks = np.inf
+    print(distance)
+    print(array.shape)
+    #print(len(array is np.nan))
+    print(array.dtype)
+    print(num_peaks)
+    print(array.mean())
+    print(array.min())
+    print(len(np.isnan(array)[np.isnan(array)]))
+    print(len(array.flatten()))
     peaks_mask = peak_local_max(array, min_distance=distance, num_peaks=num_peaks,
                                 indices=False)
+    print(len(peaks_mask[peaks_mask]))
     return peaks_mask
 
 
@@ -48,6 +58,7 @@ def local_peak_to_volume(path_volume, path_peak_mask_volume, type_peak, distance
     """
     volume = nib.load(path_volume)
     data = volume.get_fdata()
+    data[np.isnan(data)] = 0  # replace nan by zeros (same as freesurfer)
     peaks_mask = get_local_peaks(data, type_peak, distance, num_peaks)
     peaks_volume = nib.Nifti1Image(peaks_mask, volume.affine, volume.header)
     nib.save(peaks_volume, path_peak_mask_volume)
@@ -109,7 +120,7 @@ def main():
     args = parser.parse_args()
     local_peak_to_volume(args.volume, args.peaks_volume, type_peak=args.type_peak,
                          distance=args.dist,
-                         num_peaks=args.num_peaks)
+                         num_peaks=np.inf)
     pass
 
 
