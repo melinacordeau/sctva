@@ -120,7 +120,7 @@ def main():
     args = parser.parse_args()
     local_peak_to_volume(args.volume, args.peaks_volume, type_peak=args.type_peak,
                          distance=args.dist,
-                         num_peaks=np.inf)
+                         num_peaks=args.num_peaks)
     pass
 
 
