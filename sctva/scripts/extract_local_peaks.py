@@ -50,7 +50,7 @@ def local_peak_to_volume(path_volume, path_peaks, type_peak, distance, \
     data = volume.get_fdata()
     data[np.isnan(data)] = 0  # replace nan by zeros (same as freesurfer)
     peaks_vox_coord = get_local_peaks(data, type_peak, distance, num_peaks)
-    peaks_mm_coord = nib.apply_affine(volume.affine, peaks_vox_coord)
+    peaks_mm_coord = nib.affines.apply_affine(volume.affine, peaks_vox_coord)
     np.savetxt(path_peaks, peaks_mm_coord)
 
 
@@ -107,7 +107,7 @@ def main():
     """
     parser = build_argparser()
     args = parser.parse_args()
-    local_peak_to_volume(args.volume, args.peaks_volume, type_peak=args.type_peak,
+    local_peak_to_volume(args.volume, args.path_peaks_file, type_peak=args.type_peak,
                          distance=args.dist,
                          num_peaks=args.num_peaks)
     pass
